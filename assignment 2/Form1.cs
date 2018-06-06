@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace assignment_2
 {
@@ -28,15 +29,30 @@ namespace assignment_2
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "";
-            OpenFileDialog1.Filter = "CSV Files|*.csv";
+            openFileDialog1.Filter = "CSV Files|*.csv";
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK)
-            { 
                 try
                 {
-                    using (StreamReader sr = new StreamReader(openFileDialog1.FileName))
-
+                    using (StreamReader sr = new StreamReader(openFileDialog1.FileName)) ;
+                    {
+                        string line = sr.ReadLine.();
+                        while (!sr.EndOfStream)
+                        {
+                            table.Add(new row());
+                            string[] r = sr.ReadLine().Split(",");
+                            table.Last().time = double.Parse(r[0]);
+                            table.Last().charge = double.Parse(r[1]);
+                        }
+                    }
                 }
-        }
-    }
-}
+                
+            
+
+
+       
+    
+
+
+
+
